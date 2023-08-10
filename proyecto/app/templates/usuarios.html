@@ -1,0 +1,50 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block title %}Usuarios{% endblock %}
+
+{% block content %}
+    
+    {% if usuarios  %}
+       <div class="m-5"> 
+            <h1 class ="m-3">Listado Usuarios</h1>
+            <table class="table align-middle  table-hover">
+                <thead class="table-dark">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">País</th>
+                    <th scope="col">Edad</th>
+                    <th scope="col">Acción</th>
+                </tr>
+                </thead>
+                <tbody class="table-light">
+                    {% for usuario in usuarios %} 
+                        <tr>
+                            <th scope="row">{{usuario.id}}</th>
+                            <td>{{usuario.nombre}} {{usuario.apellido}}</td>
+                            <td>{{usuario.pais}}</td>
+                            <td>{{usuario.edad}}</td>
+                            <td>
+                            <button type="button" class="btn btn-link btn-sm px-3" data-ripple-color="dark">
+                                <i class="material-icons" style="font-size:24px; color:black">border_color</i>
+                            </button>
+                            <button type="button" class="btn btn-link btn-sm px-3" data-ripple-color="dark">
+                                <i class="fa fa-trash-o" style="font-size:24px; color:red"></i>
+                            </button>
+
+                            
+                            
+                            </td>
+                        </tr>
+                        
+                    {% endfor %}
+                </tbody>
+            </table>
+        
+            {% else %}
+            <h1>No hay usuarios registrados</h1>
+        </div>
+
+    {% endif %}
+{% endblock %}

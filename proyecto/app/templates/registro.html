@@ -1,0 +1,27 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block title %}Registro{% endblock %}
+
+
+
+{% block content %}
+    <div class="row justify-content-center mb-5 mt-5">
+        <form method='post' class= "formulario w-50 mb-5">
+            {% csrf_token %}
+            <h3 class="mb-5 text-center"> Formulario de Registro nuevo Usuario</h3>
+
+            <!-- en el contexto le enviamos el form. y con as_p le decimos que pinte el fom en un parrafo -->
+            {{ form.as_p }}
+
+            <button type="submit" class="btn  formulario__submit ">Registrar</button>
+            
+
+        </form>   
+
+
+    </div>
+     
+{% endblock %}
+
+

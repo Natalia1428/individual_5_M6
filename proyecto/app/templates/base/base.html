@@ -1,0 +1,262 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
+            crossorigin="anonymous">
+        <link rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+        <!-- css static -->
+        <link rel="stylesheet" href="{% static 'css/estilos.css' %}">
+        <!-- font awesome icons -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha512-3M00D/rn8n+2ZVXBO9Hib0GKNpkm8MSUU/e2VNthDyBYxKWG+BftNYYcuEjXlyrSO637tidzMBXfE7sQm0INUg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <title>{% block title %}{% endblock %}</title>
+    </head>
+    <body>  
+        <!-- Nav -->
+        <header>
+        
+            
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="{% url 'index' %}">
+                        <img alt="" src="{% static 'img/icono.png' %}" width="30" height="30" className="d-inline-block align-top"/>
+                        Bienvenidos a ...
+                    </a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle
+                            navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    
+                    <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
+                        {% comment %} ms-auto esta dejando al medio los links {% endcomment %}
+                        <ul class="navbar-nav ms-auto  mb-2 mb-lg-0  ">
+                            <li class="nav-item">
+                                <a class="nav-link active " aria-current="page" href="{% url 'index' %}">Inicio</a>
+                            </li>
+                            {% if cuentaActiva %}
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'usuarios' %}">Usuarios</a>
+                                </li>
+                                {% endif %}
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" role="button"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    Sobre...
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item"
+                                            href="#"
+                                            >Quienes Somos</a></li>
+                                    <li><a class="dropdown-item"
+                                            href="#"
+                                            >---</a></li>
+                                    
+                                    <li>
+                                        <hr class="dropdown-divider">
+                                    </li>
+                                    <li><a class="dropdown-item" href="#">Encuentranos</a></li>
+                                </ul>
+                            </li>
+
+                        </ul>
+                        
+                        
+                        <div class="ms-auto">
+                            {% if cuentaActiva == False %}
+                                <a
+                                class="btn btn-outline-light btn-floating m-1"
+                                class="text-white"
+                                role="button"
+                                href="{% url 'login' %}"
+                                >Login</a>
+                            {% endif %}
+                            {% if cuentaActiva %}
+                                <a
+                                class="btn btn-outline-light btn-floating m-1"
+                                class="text-white"
+                                role="button"
+                                href="{% url 'logout' %}"
+                                >Cerrar Sesión</a>
+                            {% endif %}
+                            {% if cuentaActiva %}
+                                <a
+                                class="btn btn-outline-light btn-floating m-1"
+                                class="text-white"
+                                role="button"
+                                href="{% url 'registroUsuario' %}"
+                                >Registro</a>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    
+                </div>
+            </nav>
+
+
+        </header>
+
+        {% for message in messages %}
+            <div class="container-fluid p-0 me-auto">
+                <div class="alert {{ message.tags }} alert-dismissible" role="alert" >
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="True">&times;</span>
+                    </button>
+                    {{ message }}
+                </div>
+            </div>
+        {% endfor %}
+
+        <!-- Cuerpo -->
+        <main >
+            {% block content %}{% endblock %}
+        </main>
+
+
+        <footer id="footer-landing" class="bg-dark text-center text-white  ">
+            
+            <div class="container p-4 pb-0">
+                <!-- Section: Links -->
+                <section class="">
+                    <!--Grid row-->
+                    <div class="row">
+                    <!-- Grid column -->
+                    <div class="col-md-4 col-lg-4 col-xl-5 mx-auto mt-3">
+                        <h6 class="text-uppercase mb-4 font-weight-bold">
+                        App Django
+                        </h6>
+                        <p>Possimus maiores dolorem, in a laudantium voluptate, ea suscipit quisquam at repellat beatae doloremque consectetur.                       
+                        </p>
+                    </div>
+                    <!-- Grid column -->
+
+                    <hr class="w-100 clearfix d-md-none" />
+
+                    <!-- Grid column -->
+                    <div class="col-md-3 col-lg-3 col-xl-2 mx-auto mt-3">
+                        <h6 class="text-uppercase mb-4 font-weight-bold">Listado Links</h6>
+                        <p>
+                        <a class="text-white"  href="#">Link 1</a>
+                       
+                        </p>
+                        <p>
+                            <a class="text-white"  href="#">Link 2</a>
+                        </p>
+                        <p>
+                            <a class="text-white"  href="#">Link 3</a>
+                        </p>
+      
+                    </div>
+                    <!-- Grid column -->
+                    <hr class="w-100 clearfix d-md-none" />
+
+                    <!-- Grid column -->
+                    <hr class="w-100 clearfix d-md-none" />
+
+                    <!-- Grid column -->
+                    <div class="col-md-5 col-lg-5 col-xl-5 mx-auto mt-3">
+                        <h6 class="text-uppercase mb-4 font-weight-bold">Contáctanos</h6>
+                    
+                        <p><i class="fas fa-home mr-3"></i> Calle Bonita, nº 1234, Comuna, 0 Región, Chile</a>
+                        </p>
+                        <p><a href="mailto:naty.ponce5@gmail.com" class="text-white"><i class="fas fa-envelope mr-3"> </i> info@gmail.com</a>
+                        </p>
+                        <p><i class="fas fa-phone mr-3"></i> + 569 11 222 333</p>
+                        <p>
+                            <a href="tel:+56911222333"
+                            class="text-white"> <i class='fab fa-whatsapp' style='font-size:24px'></i>+ 569 11 222 333</a>
+                        </p>
+                    </div>
+                    <!-- Grid column -->
+                    </div>
+                    <!--Grid row-->
+                </section>
+                
+
+                <hr class="my-3">
+
+                <!-- Section: Copyright -->
+                <section class="p-3 pt-0">
+                    <div class="row d-flex align-items-center">
+                    <!-- Grid column -->
+                    <div class="col-md-7 col-lg-8 text-center text-md-start">
+                        <!-- Copyright -->
+                        <div class="p-3">
+                        © 2023 Copyright
+                        <a class="text-white" href="#"
+                            >Natalia Ponce</a
+                            >
+                        </div>
+                        <!-- Copyright -->
+                    </div>
+                    <!-- Grid column -->
+
+                    <!-- Grid column -->
+                    <div class="col-md-5 col-lg-4 ml-lg-0 text-center text-md-end">
+                        <!-- Facebook -->
+                        <a
+                        class="btn btn-outline-light btn-floating m-1"
+                        class="text-white"
+                        role="button"
+                        href="#"
+                        ><i class="fab fa-facebook-f"></i
+                        ></a>
+
+                        <!-- Twitter -->
+                        <a
+                        class="btn btn-outline-light btn-floating m-1"
+                        class="text-white"
+                        role="button"
+                        href="#"
+                        ><i class="fab fa-twitter"></i
+                        ></a>
+
+                        <!-- Google -->
+                        <a
+                        class="btn btn-outline-light btn-floating m-1"
+                        class="text-white"
+                        role="button"
+                        href="#"
+                        ><i class="fab fa-google"></i
+                        ></a>
+
+                        <!-- Instagram -->
+                        <a
+                        class="btn btn-outline-light btn-floating m-1"
+                        class="text-white"
+                        role="button"
+                        href="#"
+                        ><i class="fab fa-instagram"></i
+                        ></a>
+                    </div>
+                    <!-- Grid column -->
+                    </div>
+                </section>
+            </div>
+        </footer>
+
+        <script src="{% static 'js/logica.js' %}"></script>
+
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js"
+            integrity="sha384-zYPOMqeu1DAVkHiLqWBUTcbYfZ8osu1Nd6Z89ify25QV9guujx43ITvfi12/QExE"
+            crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.min.js"
+            integrity="sha384-Y4oOpwW3duJdCWv5ly8SCFYWqFDsfob/3GkgExXKV4idmbt98QcxXYs9UoXAB7BZ"
+            crossorigin="anonymous"></script>
+
+    </body>
+</html>
