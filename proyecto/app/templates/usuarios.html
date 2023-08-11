@@ -7,6 +7,16 @@
     
     {% if usuarios  %}
        <div class="m-5"> 
+            <div class = "text-center">
+                
+                <a
+                class="btn btn-secondary btn-floating m-1"
+                class="text-white"
+                role="button"
+                href="{% url 'registroUsuario' %}"
+                ><i class="material-icons">add_circle</i> Registrar nuevo Usuario</a>
+                
+            </div>
             <h1 class ="m-3">Listado Usuarios</h1>
             <table class="table align-middle  table-hover">
                 <thead class="table-dark">
