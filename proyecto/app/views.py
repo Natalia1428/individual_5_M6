@@ -1,5 +1,5 @@
 from django.shortcuts import redirect, render
-from .forms import UsuarioForm
+from .forms import FormularioRegistroUsuario, UsuarioForm
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import logout, login, authenticate
 from django.contrib import messages
@@ -18,30 +18,32 @@ def vista_index(request):
         messages.success(request, f'Cuenta activa : {request.user.username}')
     return render(request, 'index.html', { 'cuentaActiva': cuentaActiva }) 
 
-def vista_usuarios(request):
+def vista_clientes(request):
     cuentaActiva = False
     if request.user.is_authenticated:
         messages.success(request, f'Cuenta activa : {request.user.username}')
         cuentaActiva = True
-    usuarios = Usuario.objects.all()
+    clientes = Usuario.objects.all()
 
 
-    return render(request, 'usuarios.html', {'usuarios' : usuarios ,'cuentaActiva': cuentaActiva })
+    return render(request, 'clientes.html', {'clientes' : clientes ,'cuentaActiva': cuentaActiva })
 
 
-def vista_registroUsuario(request):
+def vista_registroCliente(request):
+    cuentaActiva = False
     if request.user.is_authenticated:
         messages.success(request, f'Cuenta activa : {request.user.username}')
+        cuentaActiva = True
     if request.method == 'POST':
         form = UsuarioForm(request.POST) 
         if form.is_valid():
             form.save()
-            return redirect('usuarios')
+            return redirect('clientes')
         
            
     else:
         form = UsuarioForm()
-    return render(request, 'registro.html', {'form': form})
+    return render(request, 'registro.html', {'form': form , 'cuentaActiva': cuentaActiva})
 
 
 @login_required
@@ -82,3 +84,14 @@ def vista_login(request):
     #     context={'form':form}
     # )
     return render(request, 'login.html', {'form':form})
+
+def registrar_usuario(request):
+    if request.method == 'POST':
+        form = FormularioRegistroUsuario(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('usuarios')
+    else:
+        form = FormularioRegistroUsuario()
+    return render(request, 'registro_usuario.html', {'form':form})
+

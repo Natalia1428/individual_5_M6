@@ -1,23 +1,24 @@
 {% extends 'base/base.html' %}
 {% load static %}
 
-{% block title %}Usuarios{% endblock %}
+{% block title %}Clientes{% endblock %}
 
 {% block content %}
     
-    {% if usuarios  %}
+    {% if clientes  %}
        <div class="m-5"> 
             <div class = "text-center">
                 
                 <a
-                class="btn btn-secondary btn-floating m-1"
+                class="btn btn-secondary btn-floating m-1 btn-lg"
                 class="text-white"
                 role="button"
-                href="{% url 'registroUsuario' %}"
-                ><i class="material-icons">add_circle</i> Registrar nuevo Usuario</a>
+                href="{% url 'registroCliente' %}"
+                ><i class="bi bi-plus-circle "></i> Registrar nuevo Cliente</a>
+                
                 
             </div>
-            <h1 class ="m-3">Listado Usuarios</h1>
+            <h1 class ="m-3">Listado Clientes</h1>
             <table class="table align-middle  table-hover">
                 <thead class="table-dark">
                 <tr>
@@ -29,12 +30,12 @@
                 </tr>
                 </thead>
                 <tbody class="table-light">
-                    {% for usuario in usuarios %} 
+                    {% for cliente in clientes %} 
                         <tr>
-                            <th scope="row">{{usuario.id}}</th>
-                            <td>{{usuario.nombre}} {{usuario.apellido}}</td>
-                            <td>{{usuario.pais}}</td>
-                            <td>{{usuario.edad}}</td>
+                            <th scope="row">{{cliente.id}}</th>
+                            <td>{{cliente.nombre}} {{cliente.apellido}}</td>
+                            <td>{{cliente.pais}}</td>
+                            <td>{{cliente.edad}}</td>
                             <td>
                             <button type="button" class="btn btn-link btn-sm px-3" data-ripple-color="dark">
                                 <i class="material-icons" style="font-size:24px; color:black">border_color</i>
